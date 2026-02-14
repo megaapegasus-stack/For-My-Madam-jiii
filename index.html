@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>For My Madam Jii 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3, #a18cd1);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+  color: white;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+@keyframes gradientMove {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.card {
+  backdrop-filter: blur(18px);
+  background: rgba(255,255,255,0.15);
+  border-radius: 25px;
+  padding: 30px 20px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+p {
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+button {
+  padding: 14px 28px;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 15px 10px;
+  transition: 0.3s;
+  min-width: 120px;
+}
+
+.yes {
+  background: white;
+  color: #ff4d6d;
+  font-weight: bold;
+}
+
+.no {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  position: relative;
+}
+
+.hidden { display: none; }
+
+#countdown {
+  margin-top: 15px;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 400px) {
+  h1 { font-size: 1.5rem; }
+  p { font-size: 0.9rem; }
+  button { font-size: 14px; padding: 12px 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<section>
+  <div class="card">
+    <h1>For My Madam Jii 💖</h1>
+    <p>Since 6th May 2025…</p>
+    <div id="countdown"></div>
+  </div>
+</section>
+
+<section>
+  <div class="card">
+    <h1>My Strawberry Idlii💌</h1>
+    <p>
+      Somewhere between good morning and goodnight…  
+      you became my bbg.  
+      Cute. Dramatic. Mine.
+    </p>
+
+    <p style="margin-top:20px;">Will you be my Valentine? 💘</p>
+
+    <button class="yes" onclick="acceptLove()">Yuss</button>
+    <button class="no" id="noBtn">No🙂</button>
+
+    <p id="response" class="hidden">
+      Humko toh pata hee thaaa 😋 I'm the luckiest guy alive 🫶🏻 💗 
+    </p>
+  </div>
+</section>
+
+<script>
+// Countdown
+const startDate = new Date("May 6, 2025 00:00:00").getTime();
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = now - startDate;
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  document.getElementById("countdown").innerHTML =
+    `It's been <b>${days}</b> days since I texted u first 💕`;
+}, 1000);
+
+// Mobile-friendly running NO button
+const noBtn = document.getElementById("noBtn");
+
+function moveButton() {
+  const x = Math.random() * 150 - 75;
+  const y = Math.random() * 80 - 40;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("touchstart", moveButton);
+
+// YES click
+function acceptLove() {
+  document.getElementById("response").classList.remove("hidden");
+  launchConfetti();
+}
+
+// Confetti
+function launchConfetti() {
+  for (let i = 0; i < 120; i++) {
+    const confetti = document.createElement("div");
+    confetti.style.position = "fixed";
+    confetti.style.width = "8px";
+    confetti.style.height = "8px";
+    confetti.style.backgroundColor = randomColor();
+    confetti.style.top = "50%";
+    confetti.style.left = "50%";
+    confetti.style.pointerEvents = "none";
+
+    const angle = Math.random() * 2 * Math.PI;
+    const distance = Math.random() * 350;
+
+    confetti.animate([
+      { transform: "translate(-50%, -50%)" },
+      { transform: `translate(${Math.cos(angle)*distance}px, ${Math.sin(angle)*distance}px)` }
+    ], {
+      duration: 1000 + Math.random() * 800,
+      easing: "ease-out"
+    });
+
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 2000);
+  }
+}
+
+function randomColor() {
+  const colors = ["#ff4d6d", "#ffffff", "#ffd6e0", "#ff85a1", "#cdb4db"];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+</script>
+
+</body>
+</html>
